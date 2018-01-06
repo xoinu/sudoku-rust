@@ -1,0 +1,6 @@
+[package]
+name = "sudoku-rust"
+version = "0.1.0"
+authors = ["Junnosuke Yamazaki <junnosukey@gmail.com>"]
+
+[dependencies]

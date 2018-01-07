@@ -12,7 +12,7 @@ fn num_empty_cells(mtx: &Board) -> i32 {
         }
     }
 
-    return n;
+    n
 }
 
 fn print_mtx(mtx: &Board) {
@@ -70,16 +70,16 @@ fn calc_candidate_at(mtx: &Board, row: usize, col: usize) -> ([u8; 9], usize) {
         }
     }
 
-    return (cand, num);
+    (cand, num)
 }
 
 fn calc_candidates(mtx: &Board) -> ([u8; 9], usize, usize, usize) {
-    let mut min_cand = [0 as u8; 9];
+    let mut min_cand = [0u8; 9];
     let mut num_min_cand = 10;
     let mut min_cand_row = 0;
     let mut min_cand_col = 0;
 
-    for i in 0..9 {
+    'find_candidate: for i in 0..9 {
         for j in 0..9 {
             let (cand, num) = calc_candidate_at(mtx, i, j);
             if num == 0 {
@@ -91,20 +91,19 @@ fn calc_candidates(mtx: &Board) -> ([u8; 9], usize, usize, usize) {
             }
             println!("");
 
-            if num == 1 {
-                return (cand, 1, i, j);
-            }
-
             if num <= num_min_cand {
                 num_min_cand = num;
                 min_cand_row = i;
                 min_cand_col = j;
                 min_cand = cand;
+                if num == 1 {
+                    break 'find_candidate;
+                }
             }
         }
     }
 
-    return (min_cand, num_min_cand, min_cand_row, min_cand_col);
+    (min_cand, num_min_cand, min_cand_row, min_cand_col)
 }
 
 fn solve_one(mtx: &mut Board, n: i32) -> bool {
@@ -132,7 +131,7 @@ fn solve_one(mtx: &mut Board, n: i32) -> bool {
         mtx[i][j] = 0;
     }
 
-    return false;
+    false
 }
 
 fn main() {
